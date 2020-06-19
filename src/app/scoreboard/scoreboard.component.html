@@ -1,0 +1,26 @@
+<form [formGroup]="scoreFormGroup">
+  <table>
+    <tr>
+      <th>Name</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+      <th>7</th>
+      <th>8</th>
+      <th>9</th>
+      <th>10</th>
+      <th>Total</th>
+    </tr>
+    <tr *ngFor="let player of players">
+      <td>{{ player.name }}</td>
+      <td *ngFor="let i of fakeTotalGame">
+        <input class="score" formControlName="{{ player.controllerName }}{{ i }}" type="number" />
+      </td>
+      <td><input class="score" formControlName="{{ player.controllerName }}_Total" type="number" /></td>
+    </tr>
+  </table>
+  <button (click)="onSubmit()">Submit</button>
+</form>

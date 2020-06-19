@@ -119,6 +119,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "BigFool"
+    }
+  },
+  "defaultProject": "BigFool",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -1,0 +1,7 @@
+<form [formGroup]="noOfPlayerForm">
+  <div *ngFor="let count of fakeArrayOfPlayer">
+    <label>Player {{ count }} </label>
+    <input formControlName="player_{{ count }}" type="text"/>
+  </div>
+  <button (click)="onSubmit()">Submit</button>
+</form>
