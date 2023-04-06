@@ -6,7 +6,7 @@ import { ScoreboardComponent } from './scoreboard/scoreboard.component';
 
 const routes: Routes = [
   { path: 'input', component: InputComponent },
-  { path: 'nameinput/:id', component: NameInputComponent },
+  { path: 'nameinput/:numOfplayer', component: NameInputComponent },
   { path: 'scoreboard/:id', component: ScoreboardComponent },
   { path: '', redirectTo: '/input', pathMatch: 'full' },
 ];

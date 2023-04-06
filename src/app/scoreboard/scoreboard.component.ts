@@ -42,7 +42,7 @@ export class ScoreboardComponent implements OnInit {
       for (let i = 0; i < this.totalGame; i++) {
         total += this.scoreFormGroup.get(`${player.name}${i}`).value;
       }
-      this.scoreFormGroup.get(`${player.name}_Total`).setValue(total);
+      // this.scoreFormGroup.get(`${player.name}_Total`).patchValue({total});
     }
   }
 }
