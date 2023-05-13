@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,13 +8,23 @@ import { Router } from '@angular/router';
   styleUrls: ['./input.component.css'],
 })
 export class InputComponent implements OnInit {
-  noOfPlayer: number;
+  form: FormGroup;
 
   constructor(private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.buildForm();
+  }
+
+  buildForm() {
+    this.form = new FormGroup({
+      noOfPlayer: new FormControl('',Validators.required)
+    })
+  }
 
   onSubmit() {
-    this.router.navigate([`/nameinput/${this.noOfPlayer}`]);
+    if(this.form.valid) {
+      this.router.navigate([`/nameinput/${this.form.value.noOfPlayer}`]);
+    }
   }
 }

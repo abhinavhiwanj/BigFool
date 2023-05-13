@@ -1,8 +1,23 @@
-d-flex {
+.d-flex {
     display: flex;
 }
 
-d-flex-vertical {
+.d-flex-vertical {
     display: flex;
     flex-direction: column;
+}
+
+body {
+    background-image: url('src/assets/images/22372133-playing-card-background-pattern.jpg');
+    font-family: Arial Rounded MT Bold;
+}
+
+.submit {
+    font-size: 25px;
+    border-radius: 5px;
+    width: 145px;
+    border: none;
+    height: 60px;
+    background-color: black;
+    color: white;
 }

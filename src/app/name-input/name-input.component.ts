@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, QueryList, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormGroup, FormControl } from '@angular/forms';
+import { PlayersService } from '../service/players.service';
 
 @Component({
   selector: 'app-name-input',
@@ -8,31 +9,33 @@ import { FormGroup, FormControl } from '@angular/forms';
   styleUrls: ['./name-input.component.css'],
 })
 export class NameInputComponent implements OnInit {
-  fakeArrayOfPlayer: any;
-  noOfPlayer: number;
+  @ViewChildren('playerName') playerNames: QueryList<ElementRef>;
+
+  Arr = Array;
+  noOfPlayer: number = 0;
   players = [];
-  noOfPlayerForm = new FormGroup({});
-  constructor(private route: ActivatedRoute, private router: Router) {}
+
+  constructor(private route: ActivatedRoute, private router: Router, private playersService: PlayersService) {}
 
   ngOnInit(): void {
-    this.noOfPlayer = Number(this.route.snapshot.paramMap.get('id'));
-    for (let count = 1; count <= this.noOfPlayer; count++) {
-      this.noOfPlayerForm.addControl(`player_${count}`, new FormControl());
-    }
-    this.fakeArrayOfPlayer = this.createArray();
+    this.noOfPlayer = Number(this.route.snapshot.params.numOfPlayer);
   }
 
-  createArray() {
-    const array = [];
-    for (let c = 0; c < this.noOfPlayer; c++) {
-      array[c] = c + 1;
-    }
-    return array;
-  }
   onSubmit() {
-    for (let c = 0; c < this.noOfPlayer; c++) {
-      this.players[c] = this.noOfPlayerForm.get(`player_${c + 1}`).value;
+    let invalid = false;
+    this.playerNames.forEach(item =>{
+      const value = item.nativeElement.value;
+      if(value) {
+        this.players.push(value)
+      } else {
+        invalid = true;
+      }
+    });
+    if(invalid) {
+      alert("Please enter all the player names");
+    } else {
+      this.playersService.playersName$.next(this.players);
+      this.router.navigate(['/scoreboard']);
     }
-    this.router.navigate([`/scoreboard/${this.players.join(',')}`]);
   }
 }

@@ -1,26 +1,23 @@
-<form [formGroup]="scoreFormGroup">
+<div class="card">
   <table>
     <tr>
-      <th>Name</th>
-      <th>1</th>
-      <th>2</th>
-      <th>3</th>
-      <th>4</th>
-      <th>5</th>
-      <th>6</th>
-      <th>7</th>
-      <th>8</th>
-      <th>9</th>
-      <th>10</th>
-      <th>Total</th>
+      <th>Game/Name</th>
+      <th *ngFor="let player of players">{{player}}</th>
     </tr>
-    <tr *ngFor="let player of players">
-      <td>{{ player.name }}</td>
-      <td *ngFor="let i of fakeTotalGame">
-        <input class="score" formControlName="{{ player.controllerName }}{{ i }}" type="number" />
-      </td>
-      <td><input class="score" formControlName="{{ player.controllerName }}_Total" type="number" /></td>
+    <tr *ngFor="let _ of [].constructor(totalGame); let x = index">
+      <td>{{ x + 1 }}</td>
+      <td *ngFor="let player of players"><input type="text" /></td>
+    </tr>
+
+  </table>
+  <div class="d-flex add">
+    <input type="button" (click)="onAddRow()" value="Add New Game" />
+  </div>
+  <table>
+    <tr>
+      <td>Total</td>
+
+      <td *ngFor="let player of players"><input disabled="true" class="score" type="text" /></td>
     </tr>
   </table>
-  <button (click)="onSubmit()">Submit</button>
-</form>
+</div>
