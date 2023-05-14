@@ -20,4 +20,4 @@ artifacts:
   files:
     - "**/*"
   discard-paths: no
-  base-directory: dist/bigfool
+  base-directory: dist/BigFool
