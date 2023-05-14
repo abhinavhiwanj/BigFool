@@ -2,22 +2,23 @@
   <table>
     <tr>
       <th>Game/Name</th>
-      <th *ngFor="let player of players">{{player}}</th>
+      <th *ngFor="let player of players">{{player.name}}</th>
     </tr>
-    <tr *ngFor="let _ of [].constructor(totalGame); let x = index">
-      <td>{{ x + 1 }}</td>
-      <td *ngFor="let player of players"><input type="text" /></td>
+    <tr *ngFor="let game of totalGame">
+      <td>{{ game.index }}</td>
+      <td *ngFor="let player of players">
+        <input (keyup)="onChange()" [(ngModel)]="game.playerScore[player.name]" type="text" />
+      </td>
     </tr>
+    <tr>
+      <td><span>Total</span></td>
 
+      <td *ngFor="let player of players">
+        <input disabled class="score" type="text" [value]="player.score" />
+      </td>
+    </tr>
   </table>
   <div class="d-flex add">
     <input type="button" (click)="onAddRow()" value="Add New Game" />
   </div>
-  <table>
-    <tr>
-      <td>Total</td>
-
-      <td *ngFor="let player of players"><input disabled="true" class="score" type="text" /></td>
-    </tr>
-  </table>
 </div>
